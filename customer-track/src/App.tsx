@@ -32,7 +32,11 @@ const App: React.FC<AppProps> = () => {
   return (
     <div>
       {/* Вывод компонентов из массива */}
-      {formComponents}
+      {formComponents.map((form) => (
+        <FormComp key={prevComponents.length + 1}>
+          <button id="deleteBtn">Удалить строку</button>
+        </FormComp>
+      ))}
 
       {/* Кнопка для добавления нового компонента в массив */}
       <button onClick={addFormComponent}>Добавить строку</button>
