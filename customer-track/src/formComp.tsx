@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import SimpleChart from "./SimpleChart";
 
 const FormComp = () => {
   class ItemProp {
@@ -24,11 +25,40 @@ const FormComp = () => {
   const [, setStartTime] = useState("");
   const [, setEndTime] = useState("");
   const [items, setItems] = useState([new ItemProp(1, "", "", "")]);
+  const [firstInt, setFirstInt] = useState<number[]>([0]);
+
+  useEffect(() => {
+    console.log(firstInt);
+  }, [firstInt]);
+
+  useEffect(() => {
+    const jsonString = localStorage.getItem("myArray");
+    if (jsonString) {
+      setItems(JSON.parse(jsonString));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (items.length > 1) {
+      localStorage.setItem("myArray", JSON.stringify(items));
+    } else if (items.length === 0) {
+      localStorage.setItem("myArray", JSON.stringify(items));
+    }
+  }, [items]);
 
   function LogAllData() {
-    items.forEach((value) => {
-      console.log(value);
-    });
+    console.log(items);
+    const newTimeArray: number[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (i < items.length - 1) {
+        // Check if items[i + 1] exists
+        const num =
+          convertTimeStringToNumbers(items[i + 1].ArriveTime) -
+          convertTimeStringToNumbers(items[i].ArriveTime);
+        newTimeArray.push(num);
+      }
+    }
+    setFirstInt(newTimeArray);
   }
 
   function GetTime() {
@@ -42,6 +72,19 @@ const FormComp = () => {
   function removeItem(id: number) {
     const newItems = items.filter((item) => item.id !== id);
     setItems(newItems);
+    localStorage.setItem("myArray", JSON.stringify(items));
+  }
+
+  function convertTimeStringToNumbers(timeString: string): number {
+    const timeArr: number[] = timeString.split(":").map(Number);
+    const time = timeArr[0] * 60 * 60 + timeArr[1] * 60 + timeArr[2];
+    return time;
+  }
+
+  function deleteAll() {
+    setItems([]);
+    localStorage.setItem("myArray", JSON.stringify(items));
+    setFirstInt([0]);
   }
 
   return (
@@ -149,7 +192,13 @@ const FormComp = () => {
       >
         Добавить строку
       </button>
+      <button type="button" onClick={deleteAll}>
+        Удалить всё
+      </button>
       <span>Осталось добавить: {100 - items.length}</span>
+      <SimpleChart
+        intervals={firstInt.length > 0 ? firstInt : [1]}
+      ></SimpleChart>
     </>
   );
 };
