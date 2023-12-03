@@ -26,6 +26,7 @@ const FormComp = () => {
   const [, setEndTime] = useState("");
   const [items, setItems] = useState([new ItemProp(1, "", "", "")]);
   const [firstInt, setFirstInt] = useState<number[]>([0]);
+  const [secondInt, setSecondInt] = useState<number[]>([0]);
 
   useEffect(() => {
     console.log(firstInt);
@@ -48,17 +49,29 @@ const FormComp = () => {
 
   function LogAllData() {
     console.log(items);
-    const newTimeArray: number[] = [];
+    const newFirstArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
       if (i < items.length - 1) {
         // Check if items[i + 1] exists
         const num =
           convertTimeStringToNumbers(items[i + 1].ArriveTime) -
           convertTimeStringToNumbers(items[i].ArriveTime);
-        newTimeArray.push(num);
+        newFirstArray.push(num);
       }
     }
-    setFirstInt(newTimeArray);
+    setFirstInt(newFirstArray);
+
+    const newSecondArray: number[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (i < items.length) {
+        // Check if items[i + 1] exists
+        const num =
+          convertTimeStringToNumbers(items[i].EndTime) -
+          convertTimeStringToNumbers(items[i].StartTime);
+        newSecondArray.push(num);
+      }
+    }
+    setSecondInt(newSecondArray);
   }
 
   function GetTime() {
@@ -85,6 +98,7 @@ const FormComp = () => {
     setItems([]);
     localStorage.setItem("myArray", JSON.stringify(items));
     setFirstInt([0]);
+    setSecondInt([0]);
   }
 
   return (
@@ -198,6 +212,9 @@ const FormComp = () => {
       <span>Осталось добавить: {100 - items.length}</span>
       <SimpleChart
         intervals={firstInt.length > 0 ? firstInt : [1]}
+      ></SimpleChart>
+      <SimpleChart
+        intervals={secondInt.length > 0 ? secondInt : [1]}
       ></SimpleChart>
     </>
   );

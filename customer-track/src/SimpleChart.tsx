@@ -13,11 +13,9 @@ export default function SimpleChart({ intervals }: ChartProps) {
     <BarChart
       xAxis={[
         {
-          categoryGapRatio: 0,
           id: "barCategories",
           data: bars,
           scaleType: "band",
-          barGapRatio: 0,
         },
       ]}
       series={[
