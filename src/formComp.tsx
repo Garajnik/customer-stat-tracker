@@ -101,6 +101,42 @@ const FormComp = () => {
     setSecondInt([0]);
   }
 
+  function importDataFromFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        try {
+          const data = JSON.parse(content);
+          setItems(data);
+          localStorage.setItem("myArray", JSON.stringify(data));
+        } catch (error) {
+          console.error("Error parsing the file content:", error);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  function exportDataToFile() {
+    const jsonString = localStorage.getItem("myArray");
+    if (jsonString) {
+      const blob = new Blob([jsonString], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "localStorageBackup.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  }
+
   return (
     <>
       {items.map((item, index) => (
@@ -206,10 +242,14 @@ const FormComp = () => {
       >
         Добавить строку
       </button>
-      <button type="button" onClick={deleteAll}>
+      <button id="deleteBtn" type="button" onClick={deleteAll}>
         Удалить всё
       </button>
       <span>Осталось добавить: {100 - items.length}</span>
+      <button type="button" onClick={exportDataToFile}>
+        Export Data
+      </button>
+      <input type="file" onChange={importDataFromFile} />
       <SimpleChart
         intervals={firstInt.length > 0 ? firstInt : [1]}
       ></SimpleChart>

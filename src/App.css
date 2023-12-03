@@ -29,16 +29,10 @@
   }
   
   #deleteBtn{
-    position: relative;
-    transform: translate(0,-12px);
-    margin-left: 10px;
+    position: fixed;
     user-select: none;
-  }
-
-  #createBtn{
-    position: relative;
-    margin: 10px;
-    user-select: none;
+    bottom: 0;
+    right: 0;
   }
 
   #mainForm{
