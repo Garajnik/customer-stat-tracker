@@ -225,6 +225,10 @@ const FormComp = () => {
               Авто
             </button>
           </label>
+          <label>
+            Заметки:
+            <input type="text" placeholder="Заметки" />
+          </label>
           <button type="button" onClick={() => removeItem(item.id)}>
             Удалить
           </button>
