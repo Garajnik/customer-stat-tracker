@@ -34,6 +34,14 @@ const FormComp = () => {
   }, [firstInt]);
 
   useEffect(() => {
+    console.log(secondInt);
+  }, [secondInt]);
+
+  useEffect(() => {
+    console.log(thirdInt);
+  }, [thirdInt]);
+
+  useEffect(() => {
     const jsonString = localStorage.getItem("myArray");
     if (jsonString) {
       setItems(JSON.parse(jsonString));
@@ -155,7 +163,7 @@ const FormComp = () => {
     <>
       {items.map((item, index) => (
         <form key={item.id}>
-          <span>{index}.</span>
+          <span>{index + 1}.</span>
           <label>
             Время прибытия:
             <input

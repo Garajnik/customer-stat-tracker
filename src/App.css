@@ -54,8 +54,16 @@
   }
 
   form{
+    position: relative;
+    display: flex;
     border: solid;
     border-width: 1px;
     border-color: grey;
+    align-items: center;
+    align-content: center;
+  }
+
+  button{
+    margin: 10px;
   }
   
