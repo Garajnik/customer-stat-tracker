@@ -27,6 +27,7 @@ const FormComp = () => {
   const [items, setItems] = useState([new ItemProp(1, "", "", "")]);
   const [firstInt, setFirstInt] = useState<number[]>([0]);
   const [secondInt, setSecondInt] = useState<number[]>([0]);
+  const [thirdInt, setThirdInt] = useState<number[]>([0]);
 
   useEffect(() => {
     console.log(firstInt);
@@ -72,6 +73,18 @@ const FormComp = () => {
       }
     }
     setSecondInt(newSecondArray);
+
+    const newThirdArray: number[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (i < items.length) {
+        // Check if items[i + 1] exists
+        const num =
+          convertTimeStringToNumbers(items[i].StartTime) -
+          convertTimeStringToNumbers(items[i].ArriveTime);
+        newThirdArray.push(num);
+      }
+    }
+    setThirdInt(newThirdArray);
   }
 
   function GetTime() {
@@ -99,6 +112,7 @@ const FormComp = () => {
     localStorage.setItem("myArray", JSON.stringify(items));
     setFirstInt([0]);
     setSecondInt([0]);
+    setThirdInt([0]);
   }
 
   function importDataFromFile(event: React.ChangeEvent<HTMLInputElement>) {
@@ -141,6 +155,7 @@ const FormComp = () => {
     <>
       {items.map((item, index) => (
         <form key={item.id}>
+          <span>{index}.</span>
           <label>
             Время прибытия:
             <input
@@ -259,6 +274,9 @@ const FormComp = () => {
       ></SimpleChart>
       <SimpleChart
         intervals={secondInt.length > 0 ? secondInt : [1]}
+      ></SimpleChart>
+      <SimpleChart
+        intervals={thirdInt.length > 0 ? thirdInt : [1]}
       ></SimpleChart>
     </>
   );
