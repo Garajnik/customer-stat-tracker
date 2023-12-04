@@ -160,7 +160,7 @@ const FormComp = () => {
   }
 
   return (
-    <>
+    <div id="content-holder">
       {items.map((item, index) => (
         <form key={item.id}>
           <span>{index + 1}.</span>
@@ -286,7 +286,7 @@ const FormComp = () => {
       <SimpleChart
         intervals={thirdInt.length > 0 ? thirdInt : [1]}
       ></SimpleChart>
-    </>
+    </div>
   );
 };
 
