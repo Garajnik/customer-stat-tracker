@@ -277,15 +277,20 @@ const FormComp = () => {
         Сохранить в файл
       </button>
       <input type="file" onChange={importDataFromFile} />
-      <SimpleChart
-        intervals={firstInt.length > 0 ? firstInt : [1]}
-      ></SimpleChart>
-      <SimpleChart
-        intervals={secondInt.length > 0 ? secondInt : [1]}
-      ></SimpleChart>
-      <SimpleChart
-        intervals={thirdInt.length > 0 ? thirdInt : [1]}
-      ></SimpleChart>
+      <div id="chart-holder">
+        <SimpleChart
+          label="Интервал между приходом"
+          intervals={firstInt.length > 0 ? firstInt : [1]}
+        ></SimpleChart>
+        <SimpleChart
+          label="Интервал обслуживания"
+          intervals={secondInt.length > 0 ? secondInt : [1]}
+        ></SimpleChart>
+        <SimpleChart
+          label="Интервал начала обслуживания"
+          intervals={thirdInt.length > 0 ? thirdInt : [1]}
+        ></SimpleChart>
+      </div>
     </div>
   );
 };

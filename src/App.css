@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+#chart-holder{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 #content-holder {
     display: flex;
     flex-direction: column;
@@ -31,7 +37,7 @@
   #deleteBtn{
     position: fixed;
     user-select: none;
-    bottom: 0;
+    top: 0;
     right: 0;
   }
 
