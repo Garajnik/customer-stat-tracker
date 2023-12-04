@@ -266,7 +266,7 @@ const FormComp = () => {
       </button>
       <span>Осталось добавить: {100 - items.length}</span>
       <button type="button" onClick={exportDataToFile}>
-        Export Data
+        Сохранить в файл
       </button>
       <input type="file" onChange={importDataFromFile} />
       <SimpleChart
