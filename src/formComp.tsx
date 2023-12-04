@@ -272,7 +272,10 @@ const FormComp = () => {
       <button id="deleteBtn" type="button" onClick={deleteAll}>
         Удалить всё
       </button>
-      <span>Осталось добавить: {100 - items.length}</span>
+      <span>
+        {" "}
+        <b> Осталось добавить: {100 - items.length} </b>
+      </span>
       <button type="button" onClick={exportDataToFile}>
         Сохранить в файл
       </button>
