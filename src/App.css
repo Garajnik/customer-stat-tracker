@@ -1,5 +1,5 @@
 *{
-    margin: 0;
+    margin: 10;
     padding: 0;
 }
 
@@ -48,7 +48,14 @@
   }
 
   label{
+    margin:10px;
     display: flex;
     flex-direction: column;
+  }
+
+  form{
+    border: solid;
+    border-width: 1px;
+    border-color: grey;
   }
   
