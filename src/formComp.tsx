@@ -57,6 +57,8 @@ const FormComp = () => {
   }, [items]);
 
   function LogAllData() {
+    //Сейвим дату, если нажата кнопка "Вывести данные"
+    localStorage.setItem("myArray", JSON.stringify(items));
     console.log(items);
     const newFirstArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
