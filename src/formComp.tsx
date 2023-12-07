@@ -8,23 +8,27 @@ const FormComp = () => {
       id: number,
       ArriveTime: string,
       StartTime: string,
-      EndTime: string
+      EndTime: string,
+      Note: string
     ) {
       this.id = id;
       this.ArriveTime = ArriveTime;
       this.StartTime = StartTime;
       this.EndTime = EndTime;
+      this.Note = Note;
     }
     id: number;
     ArriveTime: string;
     StartTime: string;
     EndTime: string;
+    Note: string;
   }
 
   const [, setArrTime] = useState("");
   const [, setStartTime] = useState("");
   const [, setEndTime] = useState("");
-  const [items, setItems] = useState([new ItemProp(1, "", "", "")]);
+  const [, setNote] = useState("");
+  const [items, setItems] = useState([new ItemProp(1, "", "", "", "")]);
   const [firstInt, setFirstInt] = useState<number[]>([0]);
   const [secondInt, setSecondInt] = useState<number[]>([0]);
   const [thirdInt, setThirdInt] = useState<number[]>([0]);
@@ -186,7 +190,8 @@ const FormComp = () => {
                   item.id,
                   newTime,
                   item.StartTime,
-                  item.EndTime
+                  item.EndTime,
+                  item.Note
                 );
                 setItems(newItems);
               }}
@@ -214,7 +219,8 @@ const FormComp = () => {
                   item.id,
                   item.ArriveTime,
                   newTime,
-                  item.EndTime
+                  item.EndTime,
+                  item.Note
                 );
                 setItems(newItems);
               }}
@@ -242,7 +248,8 @@ const FormComp = () => {
                   item.id,
                   item.ArriveTime,
                   item.StartTime,
-                  newTime
+                  newTime,
+                  item.Note
                 );
                 setItems(newItems);
               }}
@@ -252,7 +259,15 @@ const FormComp = () => {
           </label>
           <label>
             Заметки:
-            <input type="text" placeholder="Заметки" />
+            <input
+              type="text"
+              placeholder="Заметки"
+              value={item.Note}
+              onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                setNote(event.currentTarget.value);
+                item.Note = event.currentTarget.value;
+              }}
+            />
           </label>
           <button type="button" onClick={() => removeItem(item.id)}>
             Удалить
@@ -266,7 +281,7 @@ const FormComp = () => {
           if (highestId == -Infinity) {
             highestId = 0;
           }
-          setItems([...items, new ItemProp(highestId + 1, "", "", "")]);
+          setItems([...items, new ItemProp(highestId + 1, "", "", "", "")]);
         }}
       >
         Добавить строку
