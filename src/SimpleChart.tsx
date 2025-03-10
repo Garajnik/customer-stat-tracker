@@ -11,22 +11,24 @@ export default function SimpleChart({ intervals, label }: ChartProps) {
     bars.push((bars.length + 1).toString() + `, ${value}`);
   });
   return (
-    <BarChart
-      xAxis={[
-        {
-          label: label,
-          id: "barCategories",
-          data: bars,
-          scaleType: "band",
-        },
-      ]}
-      series={[
-        {
-          data: intervals,
-        },
-      ]}
-      width={500}
-      height={300}
-    />
+    <div>
+      <BarChart
+        xAxis={[
+          {
+            label: label,
+            id: "barCategories",
+            data: bars,
+            scaleType: "band",
+          },
+        ]}
+        series={[
+          {
+            data: intervals,
+          },
+        ]}
+        width={500}
+        height={300}
+      />
+    </div>
   );
 }

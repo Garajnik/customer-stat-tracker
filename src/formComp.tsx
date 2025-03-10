@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import SimpleChart from "./SimpleChart";
+import Distribution from "./NormalDistro";
 
 const FormComp = () => {
   class ItemProp {
@@ -34,15 +35,15 @@ const FormComp = () => {
   const [thirdInt, setThirdInt] = useState<number[]>([0]);
 
   useEffect(() => {
-    console.log(firstInt);
+    //console.log(firstInt);
   }, [firstInt]);
 
   useEffect(() => {
-    console.log(secondInt);
+    //console.log(secondInt);
   }, [secondInt]);
 
   useEffect(() => {
-    console.log(thirdInt);
+    //console.log(thirdInt);
   }, [thirdInt]);
 
   useEffect(() => {
@@ -63,7 +64,8 @@ const FormComp = () => {
   function LogAllData() {
     //Сейвим дату, если нажата кнопка "Вывести данные"
     localStorage.setItem("myArray", JSON.stringify(items));
-    console.log(items);
+    //console.log(items);
+
     const newFirstArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
       if (i < items.length - 1) {
@@ -74,7 +76,8 @@ const FormComp = () => {
         newFirstArray.push(num);
       }
     }
-    setFirstInt(newFirstArray);
+    setFirstInt(Distribution(newFirstArray, 20));
+    console.log(Distribution(newFirstArray, 20));
 
     const newSecondArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
