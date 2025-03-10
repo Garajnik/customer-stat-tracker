@@ -1,23 +1,18 @@
-export default function Distribution(array: number[], interval: number) {
+export default function Distribution(array: number[], numOfIntervals: number) {
     array.sort((n1, n2) => n1 - n2);
     console.log(array.sort((n1, n2) => n1 - n2));
     let newArray: number[] = [];
-    for (let i = 0; i <= interval - 1; i++) {
-        newArray.push(0);
-        let j: number = i * 5;
-        while (itFits(array[i * 5], array[(i + 1) * 5], array[j])) {
-            newArray[i] += 1;
-            j += 1;
-        }
+    const maxValueOfArray = array[array.length - 1];
+    let IntervalLength = Math.floor(maxValueOfArray / numOfIntervals);
+    let currentIndex = 0;
+    for (let i = IntervalLength; i <= maxValueOfArray; i += IntervalLength) {
+        let sum = 0;
+        do {
+            sum += 1;
+            currentIndex++;
+        } while (array[currentIndex] < i);
+        newArray.push(sum);
     }
-    return newArray;
-}
 
-function itFits(min: number, max: number, num: number) {
-    if (num >= min && num <= max) {
-        console.log(`itFits(${num}) check: ${min}, ${max} - true`);
-        return true;
-    }
-    console.log(`itFits(${num}) check: ${min}, ${max} - false`);
-    return false;
+    return newArray;
 }

@@ -77,7 +77,6 @@ const FormComp = () => {
       }
     }
     setFirstInt(Distribution(newFirstArray, 20));
-    console.log(Distribution(newFirstArray, 20));
 
     const newSecondArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
@@ -89,7 +88,7 @@ const FormComp = () => {
         newSecondArray.push(num);
       }
     }
-    setSecondInt(newSecondArray);
+    setSecondInt(Distribution(newSecondArray, 20));
 
     const newThirdArray: number[] = [];
     for (let i = 0; i < items.length; i++) {
@@ -101,7 +100,7 @@ const FormComp = () => {
         newThirdArray.push(num);
       }
     }
-    setThirdInt(newThirdArray);
+    setThirdInt(Distribution(newThirdArray, 20));
   }
 
   function GetTime() {
@@ -302,15 +301,15 @@ const FormComp = () => {
       <input type="file" onChange={importDataFromFile} />
       <div id="chart-holder">
         <SimpleChart
-          label="Интервал между приходом"
+          label="Интервал между приходом (в секундах)"
           intervals={firstInt.length > 0 ? firstInt : [1]}
         ></SimpleChart>
         <SimpleChart
-          label="Интервал обслуживания"
+          label="Интервал обслуживания (в секундах)"
           intervals={secondInt.length > 0 ? secondInt : [1]}
         ></SimpleChart>
         <SimpleChart
-          label="Интервал начала обслуживания"
+          label="Интервал начала обслуживания (в секундах)"
           intervals={thirdInt.length > 0 ? thirdInt : [1]}
         ></SimpleChart>
       </div>
