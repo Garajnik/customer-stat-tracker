@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import SimpleChart from "./SimpleChart";
-import Distribution from "./NormalDistro";
+import SimpleChart from "./SimpleChart.tsx";
+import Distribution from "./NormalDistro.ts";
 
 const FormComp = () => {
   class ItemProp {
