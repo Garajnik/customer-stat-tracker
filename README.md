@@ -1,2 +1,2 @@
 # CustomerStatTracker
-https://garajnik.github.io/CustomerStatTracker/
+https://garajnik.github.io/customer-stat-tracker/
